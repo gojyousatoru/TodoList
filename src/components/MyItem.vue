@@ -2,14 +2,14 @@
     <div>
         <input type="checkbox" :checked="todo.done" @change="check">
         <span>{{todo.title}}</span>
-        <button @click='deleteItem()'>删除</button>
+        <button @click='deleteItem'>删除</button>
     </div>
 </template>
 
 <script>
 export default {
     name:'MyItem',
-    props:['todo','checkChange','dItem'],
+    props:['todo'],
 /*    data(){
         return{
             id:this.todo.id,
@@ -17,10 +17,10 @@ export default {
     },*/
     methods:{
         check(){
-            this.checkChange(this.todo.id)
+            this.$bus.$emit('check',this.todo.id)
         },
         deleteItem(){
-            this.dItem(this.todo.id)
+            this.$bus.$emit('dItem',this.todo.id)
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MyHeader :addTodo="addTodo"/>
-    <MyList :todos='todos' :dItem='dItem' :checkChange='checkChange'/>
+    <MyList :todos='todos'  />
     <MyFooter :todos="todos" @checkTotal='checkTotal' @deleteAllTodo='deleteAllTodo'/>
   </div>
 </template>
@@ -52,8 +52,12 @@ export default{
     deleteAllTodo(){
       this.todos = []
     }
-  }
-}
+  },
+  mounted(){
+    this.$bus.$on('check',(todo)=>{this.checkChange(todo)})
+    this.$bus.$on('dItem',this.dItem)
+  
+}}
 </script>
 
 <style>
